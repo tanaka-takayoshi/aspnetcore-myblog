@@ -174,11 +174,11 @@ namespace My_Blog.Models
             if (post.IsPublic == true)
             {
                 string date = post.PubDate.UtcDateTime.ToString("s").Replace(":", "-");
-                outputFilePath = $"{PostsFolder}\\{date}_{post.Id.ToString("N")}.xml";
+                outputFilePath = $"{PostsFolder}/{date}_{post.Id.ToString("N")}.xml";
             }
             else
             {
-                outputFilePath = $"{DraftsFolder}\\{post.Id.ToString("N")}.xml";
+                outputFilePath = $"{DraftsFolder}/{post.Id.ToString("N")}.xml";
             }
             XDocument doc = new XDocument();
             XElement rootNode = new XElement("Post");
@@ -287,7 +287,7 @@ namespace My_Blog.Models
 
         public Post GetPost(string id)
         {
-            string expectedFilePath = $"{DraftsFolder}\\{id}.xml";
+            string expectedFilePath = $"{DraftsFolder}/{id}.xml";
             if (_fileSystem.FileExists(expectedFilePath))
             {
                 return CollectPostInfo(expectedFilePath);
@@ -339,11 +339,11 @@ namespace My_Blog.Models
             if (wasPublic)
             {
                 string date = post.PubDate.UtcDateTime.ToString("s").Replace(":", "-");
-                _fileSystem.DeleteFile($"{PostsFolder}\\{date}_{post.Id.ToString("N")}.xml");
+                _fileSystem.DeleteFile($"{PostsFolder}/{date}_{post.Id.ToString("N")}.xml");
             }
             else
             {
-                _fileSystem.DeleteFile($"{DraftsFolder}\\{post.Id.ToString("N")}.xml");
+                _fileSystem.DeleteFile($"{DraftsFolder}/{post.Id.ToString("N")}.xml");
             }
             SavePost(post);
         }
