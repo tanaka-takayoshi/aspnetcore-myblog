@@ -24,7 +24,7 @@ namespace My_Blog
         {
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite("Data Source=blogging.db"));
+                options.UseSqlite("Data Source=data/blogging.db"));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
