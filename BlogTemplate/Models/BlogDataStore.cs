@@ -9,9 +9,9 @@ namespace My_Blog.Models
 {
     public class BlogDataStore
     {
-        const string UploadsFolder = "wwwroot\\Uploads";
-        const string PostsFolder = "BlogFiles\\Posts";
-        const string DraftsFolder = "BlogFiles\\Drafts";
+        const string UploadsFolder = "wwwroot/Uploads";
+        const string PostsFolder = "BlogFiles/Posts";
+        const string DraftsFolder = "BlogFiles/Drafts";
         private static Object thisLock = new object();
 
         private readonly IFileSystem _fileSystem;
