@@ -1,4 +1,0 @@
-#!/bin/bash
-echo "Before running application"
-dotnet ef database update 
-exec /usr/libexec/s2i/run

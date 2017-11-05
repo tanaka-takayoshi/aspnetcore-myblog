@@ -14,6 +14,7 @@ namespace My_Blog
     {
         public Startup(IConfiguration configuration)
         {
+            
             Configuration = configuration;
         }
 
@@ -24,7 +25,7 @@ namespace My_Blog
         {
 
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite("Data Source=/etc/data/blogging.db"));
+                options.UseSqlServer(Configuration["BLOGDB_CONNECTION_STRING"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
