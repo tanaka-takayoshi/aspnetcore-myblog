@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - My Blog [Theme B]</title>
     <link rel="stylesheet" href="~/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
     <header class="container">

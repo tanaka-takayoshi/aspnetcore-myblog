@@ -23,6 +23,13 @@ namespace My_Blog
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var appinsightsKey = Configuration["APPINSIGHTS_INSTRUMENTATIONKEY"];
+            if (!string.IsNullOrEmpty(appinsightsKey))
+                services.AddApplicationInsightsTelemetry(options =>
+                {
+                    options.ApplicationVersion = "v0.1.0-theme-b";
+                    options.InstrumentationKey = appinsightsKey;
+                });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration["BLOGDB_CONNECTION_STRING"]));
