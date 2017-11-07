@@ -2,11 +2,16 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>aspnet-BlogTemplate-42899553-8CF4-4C54-9A35-69ADC51F0DA0</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/90ea86c6-0286-4442-8e3e-84ebd9999521/resourcegroups/mvpcomcon-2017/providers/microsoft.insights/components/BlogTemplate</ApplicationInsightsResourceId>
+    <ApplicationInsightsAnnotationResourceId>/subscriptions/90ea86c6-0286-4442-8e3e-84ebd9999521/resourcegroups/mvpcomcon-2017/providers/microsoft.insights/components/BlogTemplate</ApplicationInsightsAnnotationResourceId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Markdig" Version="0.13.3" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore">
+      <Version>2.1.1</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
   </ItemGroup>
@@ -20,5 +25,8 @@
     <Folder Include="BlogFiles\Drafts\" />
     <Folder Include="BlogFiles\Posts\" />
     <Folder Include="wwwroot\Uploads\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services" />
   </ItemGroup>
 </Project>
