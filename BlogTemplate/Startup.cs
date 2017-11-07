@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace My_Blog
 {
@@ -58,9 +59,17 @@ namespace My_Blog
             services.AddSingleton<MarkdownRenderer>();
         }
 
+        private const string XForwardedPathBase = "X-Forwarded-PathBase";
+        private const string XForwardedProto = "X-Forwarded-Proto";
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseForwardedHeaders(new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.XForwardedProto
+            });
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -71,6 +80,23 @@ namespace My_Blog
             {
                 app.UseExceptionHandler("/Error");
             }
+
+            //workaround https://github.com/aspnet/Docs/issues/2384#issuecomment-286146843
+            app.Use((context, next) =>
+            {
+                if (context.Request.Headers.TryGetValue(XForwardedPathBase, out StringValues pathBase))
+                {
+                    context.Request.PathBase = new PathString(pathBase);
+
+                }
+
+                if (context.Request.Headers.TryGetValue(XForwardedProto, out StringValues proto))
+                {
+                    context.Request.Protocol = proto;
+                }
+
+                return next();
+            });
 
             app.UseStaticFiles();
 
